@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>圖片輪播 jq(淡入淡出)</title>
+ <style type="text/css">
+    body,div,ul,li,a,img{margin: 0;padding: 0;}
+    ul,li{list-style: none;}
+    a{text-decoration: none;}
+ 
+    .wrapper{position: relative;margin: 30px auto;width: 1000px;height: 800px;}
+    .banner{width: 1000px;height: 800px;overflow: hidden;}
+    .imgList{width:1000px;height:800px;z-index: 10;}
+    .imgList li{display: none;}
+    @keyframes imgIN {
+    0% {/*透明度調整*/opacity: 0;}
+    100% {opacity: 1;}
+    }
+    @keyframes imgOut {
+    0% {/*透明度調整*/opacity: 1;}
+    100% {opacity: 0;}
+    }
+    .bg{position: absolute;bottom: 0;width: 1000px;height: 40px;z-index:20;opacity: 0.4;filter:alpha(opacity=40);background: black;}
+    .infoList{position: absolute;left: 10px;bottom: 10px;z-index: 30;}
+    .infoList li{display: none;}
+    .infoList .infoOn{display: inline;color: white;}
+ </style>
+ </head>
+
+ <body onload = "startTimer()">
+    <div class="wrapper"><!-- 最外層部分 -->
+        <div class="banner"><!-- 輪播部分 -->
+            <ul class="imgList"><!-- 圖片部分 -->
+                <li style="display: inline;" id="img1"><a href="#"><img src="images/beautiful_city.jpeg" width="1000px" height="800px" alt="puss in boots1"></a></li>
+                <li id="img2"><a href="#"><img src="images/city_sea.jpeg" width="1000px" height="800px" alt="puss in boots2"></a></li>
+                <li id="img3"><a href="#"><img src="images/road.jpeg" width="1000px" height="800px" alt="puss in boots3"></a></li>
+                <li id="img4"><a href="#"><img src="images/pen_book.jpeg" width="1000px" height="800px" alt="puss in boots4"></a></li>
+                <li id="img5"><a href="#"><img src="images/train_station.jpeg" width="1000px" height="800px" alt="puss in boots5"></a></li>
+            </ul>
+            <div class="bg"></div> <!-- 圖片底部背景層部分-->
+            <ul class="infoList"><!-- 圖片左下角文字信息部分 -->
+                <li class="infoOn">puss in boots1</li>
+                <li>puss in boots2</li>
+                <li>puss in boots3</li>
+                <li>puss in boots4</li>
+                <li>puss in boots5</li>
+            </ul>
+
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    var images=[], x = 0;
+    images[0]="img1";
+    images[1]="img2";
+    images[2]="img3";
+    images[3]="img4";
+    images[4]="img5";
+
+    function displayNextImage() {
+        x = x + 1;
+        if (x == images.length){
+            changeOUT(images[images.length-1],images[0])
+            x = 0;
+        }
+        else{
+            changeOUT(images[x-1],images[x])         
+        };
+    }
+
+    function startTimer() {
+        setInterval(displayNextImage, 10000);
+    }
+
+    function changeOUT(x,y){ 
+        document.getElementById(x).style.animation = "imgOut 1s";
+        setTimeout(function(){document.getElementById(x).style.display = "none";}, 900);
+        setTimeout(function(){document.getElementById(y).style.display = "inline";}, 1000);
+        document.getElementById(y).style.animation = "imgIN 2s";
+     }
+     </script>
+</body>
+</html>

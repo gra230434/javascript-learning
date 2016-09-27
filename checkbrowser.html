@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+
+	//var nAgt = navigator.userAgent;
+	
+	function browsername () {
+		var nAgt = navigator.userAgent;
+		if (nAgt.indexOf("Window") != -1) {
+			if (nAgt.indexOf("Edge") != -1) {return "Edge"}
+			else if (nAgt.indexOf("Chrome") != -1) {return "Chrome";}
+			else if (nAgt.indexOf("Firefox") != -1) {return "Firefox";}
+			else {return "IE";}
+		}
+		else if (nAgt.indexOf("Macintosh") != -1) {
+			if (nAgt.indexOf("Safari") != -1) {
+				if (nAgt.indexOf("Chrome") != -1) {return "Chrome";}
+				else {return "Safari";}
+			}
+			else if (nAgt.indexOf("Firefox") != -1) {return "Firefox";}
+			else {return "Opera";}
+		}
+	}
+
+	
+
+	</script>
+</head>
+<body>
+
+<p>
+	<script type="text/javascript">
+	document.write(nAgt);
+	</script>
+</p>
+
+<p>Click the button to extract characters from the string.</p>
+
+<p id="demo">123</p>
+
+<script type="text/javascript">
+	fullname = browsername();
+	document.getElementById("demo").innerHTML = fullname;
+</script>
+
+</body>
+</html>

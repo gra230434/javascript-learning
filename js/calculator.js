@@ -1,8 +1,3 @@
-function whatisprevious()
-{
-
-}
-
 $(document).ready(function(){
 
   var outputanswer = 0;
